@@ -29,7 +29,7 @@ const NavBar = () => {
   };
 
   const nav_links = [
-    { name: "Home", link: "/HomePage", label: "home" },
+    { name: "Home", link: "/", label: "home" },
     { name: "Jobs", link: "/Jobs", label: "Jobs" },
     { name: "About Us", link: "/About Us", label: "About Us" },
     { name: "Contact Us", link: "/Contact Us", label: "Contact Us" },

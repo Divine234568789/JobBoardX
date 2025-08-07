@@ -8,6 +8,10 @@ import RegisterPage from "./pages/RegisterPage.jsx";
 import Login from "./pages/Login.jsx";
 import { Toaster } from "react-hot-toast";
 import Post from "./pages/Post.jsx";
+import AddJobDetails from "./pages/AddJobDetails.jsx";
+import Pay from "./pages/Pay.jsx";
+import { PayProvider } from "./Contexts/PayContext.jsx";
+import FinalizeJob from "./pages/FinalizeJob.jsx";
 
 const HomePage = lazy(() => import("./pages/HomePage.jsx"));
 const AboutPage = lazy(() => import("./pages/AboutPage.jsx"));
@@ -43,15 +47,29 @@ const router = createBrowserRouter([
         path: "/Posting",
         element: <Post />,
       },
+      {
+        path: "/Job-Details",
+        element: <AddJobDetails />,
+      },
+      {
+        path: "/ChoosePay",
+        element: <Pay />,
+      },
+      {
+        path: "/Finalization",
+        element: <FinalizeJob />,
+      },
     ],
   },
 ]);
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <Suspense fallback={<PageLoading />}>
-      <RouterProvider router={router} />
-      <Toaster position="top-center" reverseOrder={false} />
-    </Suspense>
+    <PayProvider>
+      <Suspense fallback={<PageLoading />}>
+        <RouterProvider router={router} />
+        <Toaster position="top-center" reverseOrder={false} />
+      </Suspense>
+    </PayProvider>
   </StrictMode>
 );
