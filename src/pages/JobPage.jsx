@@ -1,8 +1,8 @@
 import { useState } from "react";
-import Navbar from "../components/HomePage/NavBar";
+import Navbar from "../components/HomePage/Navbar";
 import PostedJob from "./PostedJobs";
 import SearchBar from "../components/SearchBar2";
-import { useJobContext } from "../contexts/JobContext";
+import { useJobContext } from "../Contexts/JobContext";
 
 const JobPage = () => {
   const { jobs } = useJobContext();
