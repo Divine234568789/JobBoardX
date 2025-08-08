@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import Loading from "./Loading";
-import { useJobContext } from "../Contexts/JobContext";
+import { useJobContext } from "../contexts/JobContext";
 
 const SearchBar = () => {
   const [title, setTitle] = useState("");

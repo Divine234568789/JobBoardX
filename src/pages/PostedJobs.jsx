@@ -1,5 +1,5 @@
 import JobCard from "../components/HomePage/JobCard";
-import { useJobContext } from "../Contexts/JobContext";
+import { useJobContext } from "../contexts/JobContext";
 
 const PostedJob = () => {
   const { jobs } = useJobContext();
