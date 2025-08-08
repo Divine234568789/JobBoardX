@@ -60,7 +60,6 @@ const ContactPage = () => {
             </div>
           </div>
 
-          {/* Right Column - Form */}
           <div className="bg-green-50 rounded-lg p-6 shadow-sm">
             <h2 className="text-xl font-semibold mb-2">Contact Info</h2>
             <p className="text-gray-600 mb-6">
@@ -99,7 +98,6 @@ const ContactPage = () => {
           </div>
         </div>
 
-        {/* Map Section */}
         <div className="max-w-6xl w-full mt-12">
           <iframe
             title="map"

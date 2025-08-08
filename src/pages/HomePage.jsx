@@ -1,11 +1,16 @@
 import Button from "../components/HomePage/Button";
 import JobList from "../components/HomePage/JobList";
-import Categories from "../components/HomePage/Categories";
+import Categories from "../components/Categories";
 import NewsAndBlog from "../components/HomePage/NewsandBlog";
 import HeroSection from "../components/HomePage/HeroSection";
 import Footer from "../components/HomePage/Footer";
+import { useNavigate } from "react-router";
 
 const HomePage = () => {
+  const navigate = useNavigate();
+  const jobs = () => {
+    navigate("/Jobs");
+  };
   return (
     <div>
       <HeroSection />
@@ -19,7 +24,10 @@ const HomePage = () => {
           <p className="text-black text-base sm:text-lg">
             Explore the latest job opportunities tailored for you
           </p>
-          <button className="text-blue-500 underline text-base sm:text-xl hover:cursor-pointer hover:text-blue-400">
+          <button
+            className="text-blue-500 underline text-base sm:text-xl hover:cursor-pointer hover:text-blue-400"
+            onClick={jobs}
+          >
             View all
           </button>
         </div>

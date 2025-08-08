@@ -1,6 +1,7 @@
 import { CatCard } from "./CatCard";
-// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
+import { useJobContext } from "../contexts/JobContext";
 
 const categories = [
   { id: 1, Icon: "TreePine", Name: "Agriculture", Amount: 1254 },
@@ -27,6 +28,17 @@ const cardVariants = {
 };
 
 export default function Categories() {
+  const navigate = useNavigate();
+  const { setFilters } = useJobContext();
+
+  const handleCategoryClick = (categoryName) => {
+    setFilters((prev) => ({
+      ...prev,
+      category: categoryName,
+    }));
+    navigate("/jobs");
+  };
+
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 m-6">
       {categories.map((cat, index) => (
@@ -38,7 +50,8 @@ export default function Categories() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
           whileHover={{ scale: 1.05 }}
-          className="transition-transform duration-300"
+          className="transition-transform duration-300 cursor-pointer"
+          onClick={() => handleCategoryClick(cat.Name)}
         >
           <CatCard {...cat} />
         </motion.div>

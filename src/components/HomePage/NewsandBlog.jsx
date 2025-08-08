@@ -40,9 +40,6 @@ const NewsAndBlog = () => {
             Stay updated with the latest news and insights from the job market.
           </p>
         </div>
-        <a href="#" className="text-teal-600 font-medium hover:underline">
-          View all
-        </a>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
