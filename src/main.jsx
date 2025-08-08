@@ -10,8 +10,8 @@ import { Toaster } from "react-hot-toast";
 import Post from "./pages/Post.jsx";
 import AddJobDetails from "./pages/AddJobDetails.jsx";
 import Pay from "./pages/Pay.jsx";
-import { PayProvider } from "./Contexts/PayContext.jsx";
 import FinalizeJob from "./pages/FinalizeJob.jsx";
+import { JobProvider } from "./Contexts/JobContext.jsx";
 
 const HomePage = lazy(() => import("./pages/HomePage.jsx"));
 const AboutPage = lazy(() => import("./pages/AboutPage.jsx"));
@@ -65,11 +65,11 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <PayProvider>
+    <JobProvider>
       <Suspense fallback={<PageLoading />}>
         <RouterProvider router={router} />
         <Toaster position="top-center" reverseOrder={false} />
       </Suspense>
-    </PayProvider>
+    </JobProvider>
   </StrictMode>
 );

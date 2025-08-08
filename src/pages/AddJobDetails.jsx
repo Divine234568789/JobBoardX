@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router";
 import { ChevronLeft, Plus, ArrowRight, Check } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import toast from "react-hot-toast";
+import { useJobContext } from "../Contexts/JobContext";
 
 const jobTypes = [
   "Full-time",
@@ -14,7 +16,15 @@ const jobTypes = [
 
 const AddJobDetails = () => {
   const navigate = useNavigate();
-  const [selectedJobTypes, setSelectedJobTypes] = useState([]);
+  const { updateTempJob, jobInProgress } = useJobContext();
+
+  const [selectedJobTypes, setSelectedJobTypes] = useState(
+    jobInProgress.selectedJobTypes || []
+  );
+
+  useEffect(() => {
+    setSelectedJobTypes(jobInProgress.selectedJobTypes || []);
+  }, [jobInProgress]);
 
   const toggleJobType = (type) => {
     setSelectedJobTypes((prev) =>
@@ -26,12 +36,12 @@ const AddJobDetails = () => {
 
   const handleContinue = () => {
     if (selectedJobTypes.length === 0) {
-      alert("Please select at least one job type.");
+      toast.error("Please select at least one job type.");
       return;
     }
 
-    // You can store or pass the data here
-    console.log("Selected Job Types:", selectedJobTypes);
+    updateTempJob({ selectedJobTypes });
+
     navigate("/ChoosePay");
   };
 

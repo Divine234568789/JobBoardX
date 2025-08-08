@@ -1,11 +1,13 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router";
-import { PayContext } from "../Contexts/PayContext";
+import { useJobContext } from "../Contexts/JobContext";
 import toast from "react-hot-toast";
 
 const FinalizeJob = () => {
-  const { jobData, setJobData } = useContext(PayContext);
-  const [description, setDescription] = useState("");
+  const { addJob, jobInProgress, updateTempJob } = useJobContext();
+  const [description, setDescription] = useState(
+    jobInProgress.description || ""
+  );
   const navigate = useNavigate();
 
   const handlePostJob = () => {
@@ -14,15 +16,15 @@ const FinalizeJob = () => {
     }
 
     const finalJob = {
-      ...jobData,
+      ...jobInProgress,
       description,
-      postedAt: new Date().toISOString(),
+      id: Date.now(),
+      postedAt: new Date().toLocaleDateString(),
     };
 
-    console.log("Posting job:", finalJob);
+    addJob(finalJob);
     toast.success("Job posted successfully!");
 
-    setJobData({});
     navigate("/Jobs");
   };
 

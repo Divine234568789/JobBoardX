@@ -4,6 +4,7 @@ import axios from "axios";
 import SearchBar from "../components/Jobs/SearchBar2";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Navbar from "../components/HomePage/Navbar";
+import PostedJob from "./PostedJobs";
 
 const JobPage = () => {
   const fetchJobs = async () => {
@@ -86,7 +87,9 @@ const JobPage = () => {
           </div>
         </aside>
 
-        <main className="w-3/4 space-y-4"> </main>
+        <main className="w-3/4 space-y-4">
+          <PostedJob />{" "}
+        </main>
       </div>
     </div>
   );

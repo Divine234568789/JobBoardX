@@ -1,12 +1,26 @@
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
-import { usePay } from "../Contexts/PayContext";
 import { ChevronLeft, ArrowRight } from "lucide-react";
 import toast from "react-hot-toast";
+import { useJobContext } from "../Contexts/JobContext";
 
 const Pay = () => {
   const navigate = useNavigate();
-  const { minPay, setMinPay, maxPay, setMaxPay, rate, setRate } = usePay();
+  const { jobInProgress, updateTempJob } = useJobContext();
+
+  const [minPay, setMinPay] = useState("");
+  const [maxPay, setMaxPay] = useState("");
+  const [rate, setRate] = useState("per year");
   const payType = "Range";
+
+  useEffect(() => {
+    if (jobInProgress?.payDetails) {
+      const { minPay, maxPay, rate } = jobInProgress.payDetails;
+      setMinPay(minPay || "");
+      setMaxPay(maxPay || "");
+      setRate(rate || "per year");
+    }
+  }, [jobInProgress]);
 
   const isFormValid =
     minPay !== "" && maxPay !== "" && parseInt(minPay) <= parseInt(maxPay);
@@ -16,6 +30,10 @@ const Pay = () => {
       toast.error("Please enter a valid pay range.");
       return;
     }
+
+    const payDetails = { minPay, maxPay, rate };
+    updateTempJob({ payDetails });
+    console.log("Pay Info saved temporarily:", payDetails);
 
     navigate("/Finalization");
   };
@@ -52,7 +70,6 @@ const Pay = () => {
                 <input
                   type="number"
                   className="border border-gray-300 rounded-md px-3 py-2 ps-8"
-                  placeholder=""
                   value={minPay}
                   onChange={(e) => setMinPay(e.target.value)}
                 />
@@ -70,7 +87,6 @@ const Pay = () => {
                 <input
                   type="number"
                   className="border border-gray-300 rounded-md px-3 py-2 ps-8"
-                  placeholder=""
                   value={maxPay}
                   onChange={(e) => setMaxPay(e.target.value)}
                 />
