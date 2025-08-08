@@ -1,7 +1,7 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router";
-import { auth, googleProvider } from "firebase";
+import { auth, googleProvider } from "../library/firebase";
 import { signInWithPopup } from "firebase/auth";
 
 const RegisterPage = () => {
