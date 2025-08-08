@@ -1,18 +1,22 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
+import { Eye, EyeClosed } from "lucide-react";
 import { auth, googleProvider } from "../library/firebase";
 import { signInWithPopup } from "firebase/auth";
 
 const RegisterPage = () => {
-  const [email, setEmail] = useState < string > "";
-  const [password, setPassword] = useState < string > "";
-  const [confirmPassword, setConfirmPassword] = useState < string > "";
-  const [error, setError] = useState < string > "";
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [error, setError] = useState("");
 
   const navigate = useNavigate();
 
-  const handleGoogleSignup = () => {
+  const handleGoogleSignup = async () => {
     const handleSignin = async () => {
       try {
         const result = await signInWithPopup(auth, googleProvider);
@@ -27,17 +31,16 @@ const RegisterPage = () => {
         localStorage.setItem(`user:${user.email}`, JSON.stringify(userData));
 
         toast.success(`Signed up as ${user.displayName}`);
-        navigate("/Login-page");
+        navigate("/Login");
       } catch (error) {
         console.error(error);
         toast.error("Google sign-in failed");
       }
     };
-
     return handleSignin();
   };
 
-  const handleSignup = (e) => {
+  const handleSignup = async (e) => {
     e.preventDefault();
     setError("");
 
@@ -69,85 +72,93 @@ const RegisterPage = () => {
     }
 
     const user = {
+      name,
       email,
       password,
     };
 
     localStorage.setItem(`user:${email}`, JSON.stringify(user));
     toast.success("Account created! Redirecting to login...");
-    setTimeout(() => navigate("/Login-page"), 1500);
+    setTimeout(() => navigate("/Login"));
   };
 
   return (
-    <div className="relative w-screen h-screen log">
-      <header>
-        <div className="bg-black h-full opacity-55 absolute overflow-hidden w-full"></div>
-        <img
-          src="/img/logo.png"
-          alt="Netflix Logo"
-          width={300}
-          className="pl-28 pt-3 relative"
-        />
-      </header>
+    <div className="relative w-full h-full log">
+      <img
+        src="/img/logimg.jpeg"
+        alt="Background"
+        className="h-full w-screen blur-xs absolute"
+      />
 
       <main className="flex-grow flex items-center justify-center py-8 px-4 relative">
-        <div className="w-full max-w-md bg-[#141414] bg-opacity-80 rounded-lg p-8 md:p-12">
-          <h1 className="text-3xl font-bold mb-8 text-white">Sign Up</h1>
-          <form action="/submit" onSubmit={handleSignup} className="space-y-6">
-            <div>
+        <div className="w-full max-w-md bg-blue-400 bg-opacity-80 rounded-lg p-8 md:p-12">
+          <h1 className="text-3xl font-bold mb-8 text-white">
+            Sign Up with <span className="text-blue-600">JobBoardX</span>
+          </h1>
+
+          <form onSubmit={handleSignup} className="space-y-6">
+            <input
+              type="name"
+              placeholder="Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="w-full p-3 rounded bg-white text-black focus:outline-none focus:ring-2 focus:ring-blue-600"
+            />
+
+            <input
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full p-3 rounded bg-white text-black focus:outline-none focus:ring-2 focus:ring-blue-600"
+            />
+
+            <div className="relative">
               <input
-                type="email"
-                name="email"
-                placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full p-3 py-2 rounded bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-red-600"
-              />
-            </div>
-            <div>
-              <input
-                type="password"
+                type={showPassword ? "text" : "password"}
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full p-3 py-2 rounded bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-red-600"
+                className="w-full p-3 rounded bg-white text-black focus:outline-none focus:ring-2 focus:ring-blue-600"
               />
+              <span
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 top-3 cursor-pointer text-gray-800"
+              >
+                {showPassword ? <EyeClosed size={20} /> : <Eye size={20} />}
+              </span>
             </div>
-            <div>
+
+            <div className="relative">
               <input
-                type="password"
+                type={showConfirmPassword ? "text" : "password"}
                 placeholder="Confirm Password"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
-                className="w-full p-3 py-2 rounded bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-red-600"
+                className="w-full p-3 rounded bg-white text-black focus:outline-none focus:ring-2 focus:ring-blue-600"
               />
+              <span
+                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                className="absolute right-3 top-3 cursor-pointer text-gray-800"
+              >
+                {showConfirmPassword ? (
+                  <EyeClosed size={20} />
+                ) : (
+                  <Eye size={20} />
+                )}
+              </span>
             </div>
+
             <button
               type="submit"
-              className="w-full bg-red-600 text-white font-bold py-3 rounded cursor-pointer hover:bg-red-900 transition duration-200"
+              className="w-full bg-blue-600 text-white font-bold py-3 rounded hover:bg-blue-900 transition duration-200"
             >
-              Sign Up
+              Register Now
             </button>
-
-            <div className="flex justify-between items-center">
-              <div className="flex items-center">
-                <input
-                  type="checkbox"
-                  id="remember"
-                  className="mr-2 rounded focus:ring-red-600"
-                />
-                <label htmlFor="remember" className="text-gray-400 text-sm">
-                  Remember me
-                </label>
-              </div>
-              <div>
-                <a href="" className="text-gray-300 text-sm hover:underline">
-                  Need help?
-                </a>
-              </div>
-            </div>
           </form>
+
           {error && <p className="text-red-600 mt-3">{error}</p>}
+
           <div className="mt-8">
             <div className="flex items-center">
               <div className="h-px bg-gray-500 flex-grow"></div>
@@ -155,37 +166,23 @@ const RegisterPage = () => {
               <div className="h-px bg-gray-500 flex-grow"></div>
             </div>
 
-            <div className="mt-6 space-y-4">
-              <button
-                onClick={handleGoogleSignup}
-                className="w-full flex items-center justify-center bg-white text-black font-bold py-3 rounded hover:bg-gray-400 hover:cursor-pointer "
-              >
-                <i className="mr-2 text-red-600"></i>
-                Sign in with Google
-              </button>
-            </div>
+            <button
+              onClick={handleGoogleSignup}
+              className="mt-6 w-full flex items-center justify-center bg-white text-black font-bold py-3 rounded hover:bg-gray-400"
+            >
+              Sign in with Google
+            </button>
           </div>
+
           <div className="mt-8 text-center">
             <p className="text-gray-300">
-              Already have an Account?
+              Already have an account?{" "}
               <a
-                href="/Login-page"
+                href="/Login"
                 className="text-white hover:underline font-medium"
               >
                 Log In now
               </a>
-              .
-            </p>
-          </div>
-
-          <div className="mt-8 p-4 bg-black bg-opacity-40 rounded">
-            <p className="text-xs text-gray-300 text-center">
-              This page is protected by Google reCAPTCHA to ensure you're not a
-              bot.
-              <span className="text-blue-500 hover:underline cursor-pointer">
-                Learn more
-              </span>
-              .
             </p>
           </div>
         </div>
