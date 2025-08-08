@@ -1,12 +1,11 @@
-import Navbar from "../components/HomePage/Navbar";
-
 import { Phone, Mail, Clock, MapPin } from "lucide-react";
+import NavBar from "../components/HomePage/Navbar";
 
 const ContactPage = () => {
   return (
     <div>
       <div className="bg-black">
-        <Navbar />
+        <NavBar />
         <h3 className="font-bold text-3xl sm:text-4xl p-6 sm:p-8 text-white text-center">
           Contact Us
         </h3>
