@@ -1,42 +1,34 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import Loading from "../Loading";
+import { useNavigate } from "react-router";
+import Loading from "./Loading";
+import { useJobContext } from "../Contexts/JobContext";
 
 const SearchBar = () => {
   const [title, setTitle] = useState("");
   const [location, setLocation] = useState("");
-  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
-  const handleSearch = async () => {
-    try {
-      setLoading(true);
-      const options = {
-        method: "GET",
-        url: "https://jsearch.p.rapidapi.com/search",
-        params: {
-          query: `${title} in ${location}`,
-          page: "1",
-          num_pages: "1",
-        },
-        headers: {
-          "X-RapidAPI-Key": import.meta.env.VITE_RAPIDAPI_KEY,
-          "X-RapidAPI-Host": "jsearch.p.rapidapi.com",
-        },
-      };
+  const navigate = useNavigate();
+  const { jobs, setFilteredJobs } = useJobContext();
 
-      const response = await axios.request(options);
-      setJobs(response.data.data);
-      setFilters({ title, location });
-      setPage(1);
-      navigate("/jobs");
-    } catch (error) {
-      console.error("API Error:", error);
-    } finally {
-      setLoading(false);
-    }
+  const handleSearch = () => {
+    setLoading(true);
+
+    const filtered = jobs.filter((job) => {
+      const titleMatch = job.jobTitle
+        .toLowerCase()
+        .includes(title.toLowerCase());
+      const locationMatch = job.location
+        .toLowerCase()
+        .includes(location.toLowerCase());
+      return titleMatch && locationMatch;
+    });
+
+    setFilteredJobs(filtered);
+    navigate("/jobs");
+    setLoading(false);
   };
+
   if (loading) return <Loading />;
 
   return (

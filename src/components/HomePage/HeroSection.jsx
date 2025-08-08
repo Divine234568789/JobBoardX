@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { BriefcaseBusiness, Building2, Users } from "lucide-react";
-import SearchBar from "./SearchBar";
+import SearchBar from "../SearchBar";
 import NavBar from "./Navbar";
 
 const iconMap = {

@@ -1,38 +1,20 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { Search } from "lucide-react";
-import axios from "axios";
+import { useJobContext } from "../Contexts/JobContext";
 
 const SearchBar = () => {
   const [title, setTitle] = useState("");
   const [location, setLocation] = useState("");
   const [category, setCategory] = useState("");
+
   const navigate = useNavigate();
+  const { setFilters, setPage } = useJobContext();
 
-  const handleSearch = async () => {
-    try {
-      const options = {
-        method: "GET",
-        url: "https://jsearch.p.rapidapi.com/search",
-        params: {
-          query: `${title} in ${location}`,
-          page: "1",
-          num_pages: "1",
-        },
-        headers: {
-          "X-RapidAPI-Key": import.meta.env.VITE_RAPIDAPI_KEY,
-          "X-RapidAPI-Host": "jsearch.p.rapidapi.com",
-        },
-      };
-
-      const response = await axios.request(options);
-      setJobs(response.data.data);
-      setFilters({ title, location, category });
-      setPage(1);
-      navigate("/jobs");
-    } catch (error) {
-      console.error("API Error:", error);
-    }
+  const handleSearch = () => {
+    setFilters({ title, location, category });
+    setPage(1);
+    navigate("/jobs");
   };
 
   return (
@@ -46,12 +28,12 @@ const SearchBar = () => {
           className="py-2 px-1 w-full md:w-auto flex-1 text-black border-b-gray-500 border-b lg:border-hidden md:border-hidden focus:outline-none"
         />
 
-        <div className="hidden sm:hiddden md:flex h-9 bg-gray-700 w-px"></div>
+        <div className="hidden md:flex h-9 bg-gray-700 w-px"></div>
 
         <select
           value={location}
           onChange={(e) => setLocation(e.target.value)}
-          className="py-2 px-4 w-full md:w-auto text-black hover:cursor-pointer border-gray-300 bg-white focus:outline-none  border-b-gray-500 border-b lg:border-hidden md:border-hidden"
+          className="py-2 px-4 w-full md:w-auto text-black hover:cursor-pointer border-b-gray-500 border-b lg:border-hidden md:border-hidden"
         >
           <option value="">Select Location</option>
           <option value="Lagos">Lagos</option>
@@ -59,12 +41,12 @@ const SearchBar = () => {
           <option value="PH">Port Harcourt</option>
         </select>
 
-        <div className="hidden sm:hiddden md:flex h-9 bg-gray-700 w-px"></div>
+        <div className="hidden md:flex h-9 bg-gray-700 w-px"></div>
 
         <select
           value={category}
           onChange={(e) => setCategory(e.target.value)}
-          className="py-2 px-4 w-full md:w-auto text-black hover:cursor-pointer border-gray-300 bg-white focus:outline-none  border-b-gray-500 border-b lg:border-hidden md:border-hidden"
+          className="py-2 px-4 w-full md:w-auto text-black hover:cursor-pointer border-b-gray-500 border-b lg:border-hidden md:border-hidden"
         >
           <option value="">Select Category</option>
           <option value="design">Design</option>

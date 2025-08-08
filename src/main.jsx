@@ -14,7 +14,6 @@ import FinalizeJob from "./pages/FinalizeJob.jsx";
 import { JobProvider } from "./Contexts/JobContext.jsx";
 
 const HomePage = lazy(() => import("./pages/HomePage.jsx"));
-const AboutPage = lazy(() => import("./pages/AboutPage.jsx"));
 const ContactPage = lazy(() => import("./pages/ContactPage.jsx"));
 const JobPage = lazy(() => import("./pages/JobPage.jsx"));
 const router = createBrowserRouter([
@@ -27,10 +26,7 @@ const router = createBrowserRouter([
         path: "/Jobs",
         element: <JobPage />,
       },
-      {
-        path: "/About Us",
-        element: <AboutPage />,
-      },
+
       {
         path: "/Contact Us",
         element: <ContactPage />,

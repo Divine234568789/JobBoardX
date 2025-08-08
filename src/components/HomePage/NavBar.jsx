@@ -31,7 +31,6 @@ const NavBar = () => {
   const nav_links = [
     { name: "Home", link: "/", label: "home" },
     { name: "Jobs", link: "/Jobs", label: "Jobs" },
-    { name: "About Us", link: "/About Us", label: "About Us" },
     { name: "Contact Us", link: "/Contact Us", label: "Contact Us" },
   ];
 
@@ -42,8 +41,11 @@ const NavBar = () => {
 
         <ul className="hidden md:flex gap-10 text-[16px]">
           {nav_links.map((nav_link) => (
-            <li key={nav_link.label} className="hover:text-black">
-              <a href={nav_link.link}>{nav_link.name}</a>
+            <li key={nav_link.label} className="relative group">
+              <a href={nav_link.link} className="transition-all duration-300">
+                {nav_link.name}
+                <span className="absolute left-0 -bottom-1 w-full h-0.5 bg-white scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+              </a>
             </li>
           ))}
         </ul>
