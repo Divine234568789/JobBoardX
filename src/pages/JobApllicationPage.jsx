@@ -1,21 +1,13 @@
 import { useState } from "react";
 import { useParams } from "react-router";
 import { useJobContext } from "../contexts/JobContext";
-import toast from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 
 const JobApplicationPage = () => {
   const { id } = useParams();
   const { jobs } = useJobContext();
 
   const job = jobs.find((job) => job.id === id);
-
-  if (!job) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <h2 className="text-2xl font-bold">Job not found</h2>
-      </div>
-    );
-  }
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -38,33 +30,24 @@ const JobApplicationPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    for (const [key, value] of Object.entries(formData)) {
-      if (!value) {
-        toast.error(`Please fill in all fields.`);
-        return;
-      }
-
-      toast.success("Application submitted successfully!");
+    const { firstName, lastName, email, cv } = formData;
+    if (!firstName || !lastName || !email || !cv) {
+      toast.error("Please fill in all required fields.");
+      return;
     }
+
+    toast.success("Application submitted successfully!");
+
     Event.preventDefault();
-
-    const data = new FormData();
-
-    Object.entries(formData).forEach(([key, value]) => {
-      data.append(key, value);
-    });
-
-    data.append("jobId", job.id);
-    data.append("jobTitle", job.jobTitle);
-    data.append("company", job.companyName);
-
-    console.log("Submitted application:");
-    for (let pair of data.entries()) {
-      console.log(pair[0], pair[1]);
-    }
-
-    alert("Application submitted successfully");
   };
+
+  if (!job) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <h2 className="text-2xl font-bold">Job not found</h2>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-slate-100 flex items-center justify-center px-4 py-10">
@@ -78,6 +61,7 @@ const JobApplicationPage = () => {
             <input
               name="firstName"
               placeholder="First Name"
+              value={formData.firstName}
               onChange={handleChange}
               required
               className="w-full rounded-md border border-gray-300 px-4 py-2 focus:border-blue-500 focus:ring-blue-500 outline-none"
@@ -86,39 +70,44 @@ const JobApplicationPage = () => {
             <input
               name="lastName"
               placeholder="Last Name"
+              value={formData.lastName}
               onChange={handleChange}
               required
-              className="input w-full rounded-md border border-gray-300 px-4 py-2 focus:border-blue-500 focus:ring-blue-500 outline-none"
+              className="w-full rounded-md border border-gray-300 px-4 py-2 focus:border-blue-500 focus:ring-blue-500 outline-none"
             />
 
             <input
               type="email"
               name="email"
               placeholder="Email"
+              value={formData.email}
               onChange={handleChange}
               required
-              className="input w-full rounded-md border border-gray-300 px-4 py-2 focus:border-blue-500 focus:ring-blue-500 outline-none"
+              className="w-full rounded-md border border-gray-300 px-4 py-2 focus:border-blue-500 focus:ring-blue-500 outline-none"
             />
 
             <input
               name="city"
               placeholder="City"
+              value={formData.city}
               onChange={handleChange}
-              className="input w-full rounded-md border border-gray-300 px-4 py-2 focus:border-blue-500 focus:ring-blue-500 outline-none"
+              className="w-full rounded-md border border-gray-300 px-4 py-2 focus:border-blue-500 focus:ring-blue-500 outline-none"
             />
 
             <textarea
               name="address"
               placeholder="Address"
+              value={formData.address}
               onChange={handleChange}
-              className="input md:col-span-2 w-full rounded-md border border-gray-300 px-4 py-2 focus:border-blue-500 focus:ring-blue-500 outline-none"
+              className="md:col-span-2 w-full rounded-md border border-gray-300 px-4 py-2 focus:border-blue-500 focus:ring-blue-500 outline-none"
             />
 
             <input
               type="date"
               name="startDate"
+              value={formData.startDate}
               onChange={handleChange}
-              className="input w-full rounded-md border border-gray-300 px-4 py-2 focus:border-blue-500 focus:ring-blue-500 outline-none"
+              className="w-full rounded-md border border-gray-300 px-4 py-2 focus:border-blue-500 focus:ring-blue-500 outline-none"
             />
 
             <input
@@ -135,7 +124,6 @@ const JobApplicationPage = () => {
             <button
               type="submit"
               className="bg-blue-600 text-white px-6 py-3 rounded-md font-semibold hover:bg-blue-700 hover:cursor-pointer transition"
-              onClick={handleSubmit}
             >
               Apply Now
             </button>
