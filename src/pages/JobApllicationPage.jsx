@@ -43,9 +43,8 @@ const JobApplicationPage = () => {
         toast.error(`Please fill in all fields.`);
         return;
       }
+      toast.success("Application submitted successfully!");
     }
-
-    toast.success("Application submitted successfully!");
 
     const data = new FormData();
 
