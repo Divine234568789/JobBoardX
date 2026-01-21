@@ -1,5 +1,5 @@
 import { Phone, Mail, Clock, MapPin } from "lucide-react";
-import NavBar from "../components/HomePage/Navbar";
+import NavBar from "../components/HomePage/NavBar";
 import { useRef } from "react";
 import toast from "react-hot-toast";
 
