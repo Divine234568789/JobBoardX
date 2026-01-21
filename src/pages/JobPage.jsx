@@ -1,4 +1,4 @@
-import Navbar from "../components/HomePage/Navbar";
+import Navbar from "../components/HomePage/NavBar";
 import PostedJob from "./PostedJobs";
 
 import { useState } from "react";

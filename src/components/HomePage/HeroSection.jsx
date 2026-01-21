@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { BriefcaseBusiness, Building2, Users } from "lucide-react";
-import NavBar from "./Navbar";
+import NavBar from "./NavBar";
 
 const iconMap = {
   BriefcaseBusiness,
