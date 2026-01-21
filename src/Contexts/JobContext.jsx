@@ -10,7 +10,6 @@ export const JobProvider = ({ children }) => {
 
   const [jobInProgress, setJobInProgress] = useState({});
 
-  // persist jobs
   useEffect(() => {
     localStorage.setItem("jobs", JSON.stringify(jobs));
   }, [jobs]);
