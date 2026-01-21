@@ -44,9 +44,8 @@ const ContactPage = () => {
               You Will Grow, You Will Succeed. We Promise That
             </h1>
             <p className="text-gray-600 mb-8">
-              Pellentesque arcu facilisis nunc mi proin. Dignissim mattis in
-              lectus tincidunt tincidunt ultrices. Diam convallis morbi
-              pellentesque adipiscing.
+              Join us today and take the first step towards a brighter future.
+              Our dedicated team is here to assist you every step of the way.
             </p>
 
             <div className="space-y-6">

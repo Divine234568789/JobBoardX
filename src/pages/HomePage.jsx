@@ -45,7 +45,7 @@ const HomePage = () => {
             job opportunities.
           </p>
           <div className="mt-5 flex flex-col sm:flex-row sm:items-center sm:gap-6 gap-3 justify-center lg:justify-start">
-            <Button label="Search Job" className="rounded-xl" />
+            <Button label="Search Job" className="rounded-xl" onClick={jobs} />
           </div>
         </div>
 
