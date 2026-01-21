@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router";
 import { ArrowRight, ChevronLeft } from "lucide-react";
 import { useState } from "react";
-import { useJobContext } from "../Contexts/JobContext";
+import { useJobContext } from "../contexts/JobContext";
 import toast from "react-hot-toast";
 
 const Post = () => {

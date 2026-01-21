@@ -2,7 +2,7 @@ import { useNavigate } from "react-router";
 import { ChevronLeft, Plus, ArrowRight, Check } from "lucide-react";
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
-import { useJobContext } from "../Contexts/JobContext";
+import { useJobContext } from "../contexts/JobContext";
 
 const jobTypes = [
   "Full-time",
@@ -11,7 +11,6 @@ const jobTypes = [
   "Temporary",
   "Contract",
   "Internship",
-  "New grad",
 ];
 
 const AddJobDetails = () => {

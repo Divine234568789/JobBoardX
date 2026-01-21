@@ -1,7 +1,34 @@
 import { Phone, Mail, Clock, MapPin } from "lucide-react";
 import NavBar from "../components/HomePage/Navbar";
+import { useRef } from "react";
+import toast from "react-hot-toast";
+
+import emailjs from "@emailjs/browser";
 
 const ContactPage = () => {
+  const form = useRef();
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs
+      .sendForm(
+        "service_xclhlld",
+        "template_kz1wfwb",
+        form.current,
+        "oiHOimoAiTzmjalki"
+      )
+      .then(
+        (result) => {
+          console.log(result.text);
+          toast.success("Message sent!");
+        },
+        (error) => {
+          console.log(error.text);
+          toast.error("Failed to send message.");
+        }
+      );
+  };
   return (
     <div>
       <div className="bg-black">
@@ -35,7 +62,7 @@ const ContactPage = () => {
                 <Mail className="text-green-600 w-6 h-6 flex-shrink-0" />
                 <div>
                   <h3 className="font-semibold">Send us email</h3>
-                  <p className="text-gray-600">kramulous@sbcglobal.net</p>
+                  <p className="text-gray-600">anyanwudee@gmail.com</p>
                 </div>
               </div>
 
@@ -61,35 +88,27 @@ const ContactPage = () => {
 
           <div className="bg-green-50 rounded-lg p-6 shadow-sm">
             <h2 className="text-xl font-semibold mb-2">Contact Info</h2>
-            <p className="text-gray-600 mb-6">
-              Nibh dis faucibus proin luctus tristique
-            </p>
+
             <form className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <input
-                  type="text"
-                  placeholder="Your name"
-                  className="border rounded-md px-3 py-2 w-full"
-                />
-                <input
-                  type="text"
-                  placeholder="Your last name"
-                  className="border rounded-md px-3 py-2 w-full"
-                />
-              </div>
+              <input
+                type="name"
+                placeholder="Your name"
+                className="border rounded-md px-3 py-2 w-full"
+              />
               <input
                 type="email"
                 placeholder="Your E-mail address"
                 className="border rounded-md px-3 py-2 w-full"
               />
-              <textarea
-                placeholder="Your message..."
-                rows={4}
+              <input
+                type="message"
+                placeholder="Your Message"
                 className="border rounded-md px-3 py-2 w-full"
-              ></textarea>
+              />
+
               <button
                 type="submit"
-                className="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition"
+                className="bg-green-600 text-white px-4 py-2 rounded-md hover:cursor-pointer hover:bg-green-700 transition"
               >
                 Send Message
               </button>

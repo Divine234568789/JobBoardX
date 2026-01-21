@@ -10,12 +10,19 @@ export const JobProvider = ({ children }) => {
 
   const [jobInProgress, setJobInProgress] = useState({});
 
+  // persist jobs
   useEffect(() => {
     localStorage.setItem("jobs", JSON.stringify(jobs));
   }, [jobs]);
 
-  const addJob = (finalJob) => {
-    setJobs((prevJobs) => [...prevJobs, finalJob]);
+  const addJob = (firstJob) => {
+    const jobWithId = {
+      ...firstJob,
+      id: crypto.randomUUID(),
+      postedAt: new Date().toISOString(),
+    };
+
+    setJobs((prevJobs) => [jobWithId, ...prevJobs]);
     setJobInProgress({});
   };
 
@@ -27,7 +34,14 @@ export const JobProvider = ({ children }) => {
   };
 
   return (
-    <JobContext.Provider value={{ jobs, addJob, jobInProgress, updateTempJob }}>
+    <JobContext.Provider
+      value={{
+        jobs,
+        addJob,
+        jobInProgress,
+        updateTempJob,
+      }}
+    >
       {children}
     </JobContext.Provider>
   );

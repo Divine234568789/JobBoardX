@@ -2,8 +2,6 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { Eye, EyeClosed } from "lucide-react";
-import { auth, googleProvider } from "../library/firebase";
-import { signInWithPopup } from "firebase/auth";
 
 const RegisterPage = () => {
   const [name, setName] = useState("");
@@ -15,30 +13,6 @@ const RegisterPage = () => {
   const [error, setError] = useState("");
 
   const navigate = useNavigate();
-
-  const handleGoogleSignup = async () => {
-    const handleSignin = async () => {
-      try {
-        const result = await signInWithPopup(auth, googleProvider);
-        const user = result.user;
-
-        const userData = {
-          name: user.displayName,
-          email: user.email,
-          uid: user.uid,
-        };
-
-        localStorage.setItem(`user:${user.email}`, JSON.stringify(userData));
-
-        toast.success(`Signed up as ${user.displayName}`);
-        navigate("/Login");
-      } catch (error) {
-        console.error(error);
-        toast.error("Google sign-in failed");
-      }
-    };
-    return handleSignin();
-  };
 
   const handleSignup = async (e) => {
     e.preventDefault();
@@ -83,7 +57,7 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className="relative w-full h-full log">
+    <div className="relative w-full h-screen">
       <img
         src="/img/logimg.jpeg"
         alt="Background"
@@ -158,21 +132,6 @@ const RegisterPage = () => {
           </form>
 
           {error && <p className="text-red-600 mt-3">{error}</p>}
-
-          <div className="mt-8">
-            <div className="flex items-center">
-              <div className="h-px bg-gray-500 flex-grow"></div>
-              <span className="px-4 text-gray-200 text-sm">OR</span>
-              <div className="h-px bg-gray-500 flex-grow"></div>
-            </div>
-
-            <button
-              onClick={handleGoogleSignup}
-              className="mt-6 w-full flex items-center justify-center bg-white text-black font-bold py-3 rounded hover:bg-gray-400"
-            >
-              Sign in with Google
-            </button>
-          </div>
 
           <div className="mt-8 text-center">
             <p className="text-gray-300">

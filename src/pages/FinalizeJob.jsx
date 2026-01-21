@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import { useJobContext } from "../Contexts/JobContext";
+import { useJobContext } from "../contexts/JobContext";
 import toast from "react-hot-toast";
 
 const FinalizeJob = () => {

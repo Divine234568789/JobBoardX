@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { ChevronLeft, ArrowRight } from "lucide-react";
 import toast from "react-hot-toast";
-import { useJobContext } from "../Contexts/JobContext";
+import { useJobContext } from "../contexts/JobContext";
 
 const Pay = () => {
   const navigate = useNavigate();

@@ -11,7 +11,9 @@ import Post from "./pages/Post.jsx";
 import AddJobDetails from "./pages/AddJobDetails.jsx";
 import Pay from "./pages/Pay.jsx";
 import FinalizeJob from "./pages/FinalizeJob.jsx";
-import { JobProvider } from "./Contexts/JobContext.jsx";
+import { JobProvider } from "./contexts/JobContext.jsx";
+import ProtectedRoutes from "./utils/ProtectedRoutes.jsx";
+import JobApplicationPage from "./pages/JobApllicationPage.jsx";
 
 const HomePage = lazy(() => import("./pages/HomePage.jsx"));
 const ContactPage = lazy(() => import("./pages/ContactPage.jsx"));
@@ -21,16 +23,6 @@ const router = createBrowserRouter([
     path: "/",
     element: <App />,
     children: [
-      { path: "/", element: <HomePage /> },
-      {
-        path: "/Jobs",
-        element: <JobPage />,
-      },
-
-      {
-        path: "/Contact Us",
-        element: <ContactPage />,
-      },
       {
         path: "/Register",
         element: <RegisterPage />,
@@ -39,21 +31,39 @@ const router = createBrowserRouter([
         path: "/Login",
         element: <Login />,
       },
+      { path: "/", element: <HomePage /> },
+
       {
-        path: "/Posting",
-        element: <Post />,
-      },
-      {
-        path: "/Job-Details",
-        element: <AddJobDetails />,
-      },
-      {
-        path: "/ChoosePay",
-        element: <Pay />,
-      },
-      {
-        path: "/Finalization",
-        element: <FinalizeJob />,
+        element: <ProtectedRoutes />,
+        children: [
+          {
+            path: "/Jobs",
+            element: <JobPage />,
+          },
+
+          {
+            path: "/Contact Us",
+            element: <ContactPage />,
+          },
+
+          {
+            path: "/Posting",
+            element: <Post />,
+          },
+          {
+            path: "/Job-Details",
+            element: <AddJobDetails />,
+          },
+          {
+            path: "/ChoosePay",
+            element: <Pay />,
+          },
+          {
+            path: "/Finalization",
+            element: <FinalizeJob />,
+          },
+          { path: "/apply/:id", element: <JobApplicationPage /> },
+        ],
       },
     ],
   },

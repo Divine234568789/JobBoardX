@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { BriefcaseBusiness, Building2, Users } from "lucide-react";
-import SearchBar from "../SearchBar";
 import NavBar from "./Navbar";
 
 const iconMap = {
@@ -35,21 +34,21 @@ const iconVariants = {
 
 export default function HeroSection() {
   return (
-    <div className="relative w-full min-h-screen overflow-hidden">
+    <div className="relative w-full overflow-hidden">
       <motion.img
         initial={{ scale: 1.05 }}
         animate={{ scale: 1 }}
         transition={{ duration: 1.5, ease: "easeOut" }}
         src="/img/Job.jpeg"
         alt="background"
-        className="w-full h-full object-fill md:object-cover absolute top-0 blur-xs"
+        className="w-full h-full md:h-svw object-fill md:object-cover absolute top-0 blur-xs"
       />
 
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 0.6 }}
         transition={{ duration: 1 }}
-        className="absolute inset-0 bg-gray-800 z-10"
+        className="inset-0 bg-gray-800 z-10 w-full h-full md:h-svw object-fill md:object-cover absolute top-0 blur-xs"
       />
 
       <NavBar />
@@ -72,21 +71,15 @@ export default function HeroSection() {
           custom={1}
           variants={textVariants}
         >
-          Connecting Talent with Opportunity: Your Gateway to Career Success
+          We connect talented proffessionals with trusted companies across
+          multiple industries. Whether you're searching for your first role or
+          your next big career move, our platform makes it easy to discover
+          opportunities, aplly with confidence, and take control of your career
+          journey.
         </motion.p>
 
         <motion.div
-          className="w-full max-w-4xl px-2"
-          initial="hidden"
-          animate="visible"
-          custom={2}
-          variants={textVariants}
-        >
-          <SearchBar />
-        </motion.div>
-
-        <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-8"
+          className=" flex gap-6 mt-8 lg:mb-34"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}

@@ -1,6 +1,4 @@
 import Button from "../components/HomePage/Button";
-import JobList from "../components/HomePage/JobList";
-import Categories from "../components/Categories";
 import NewsAndBlog from "../components/HomePage/NewsandBlog";
 import HeroSection from "../components/HomePage/HeroSection";
 import Footer from "../components/HomePage/Footer";
@@ -15,7 +13,7 @@ const HomePage = () => {
     <div>
       <HeroSection />
 
-      <div className="m-6 mt-8">
+      <div className="m-6 ">
         <h2 className="font-bold text-3xl sm:text-4xl">
           Recent Jobs Available
         </h2>
@@ -31,16 +29,8 @@ const HomePage = () => {
             View all
           </button>
         </div>
-
-        <div className="mt-5">
-          <JobList />
-        </div>
       </div>
 
-      <div className="pt-10 flex flex-col items-center justify-center bg-blue-100">
-        <h2 className="font-bold text-4xl">Browse by Category</h2>
-        <Categories />
-      </div>
       <div className="mt-10 flex flex-col-reverse lg:flex-row items-center justify-center gap-10 px-4">
         <div className="text-center lg:text-left lg:max-w-xl">
           <h3 className="font-bold text-3xl sm:text-4xl lg:text-5xl leading-tight">
@@ -56,9 +46,6 @@ const HomePage = () => {
           </p>
           <div className="mt-5 flex flex-col sm:flex-row sm:items-center sm:gap-6 gap-3 justify-center lg:justify-start">
             <Button label="Search Job" className="rounded-xl" />
-            <button className="text-blue-500 underline text-base sm:text-lg hover:text-blue-400">
-              View all
-            </button>
           </div>
         </div>
 
