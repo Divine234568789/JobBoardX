@@ -43,8 +43,10 @@ const JobApplicationPage = () => {
         toast.error(`Please fill in all fields.`);
         return;
       }
+
       toast.success("Application submitted successfully!");
     }
+    Event.preventDefault();
 
     const data = new FormData();
 
@@ -131,7 +133,7 @@ const JobApplicationPage = () => {
 
           <div className="flex justify-end">
             <button
-              // type="submit"
+              type="submit"
               className="bg-blue-600 text-white px-6 py-3 rounded-md font-semibold hover:bg-blue-700 hover:cursor-pointer transition"
               onClick={handleSubmit}
             >
