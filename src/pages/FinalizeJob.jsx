@@ -41,7 +41,7 @@ const FinalizeJob = () => {
 
       <button
         onClick={handlePostJob}
-        className="mt-6 w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-md font-semibold transition"
+        className="mt-6 w-full bg-blue-600 hover:bg-blue-700 hover:cursor-pointer text-white py-3 rounded-md font-semibold transition"
       >
         Post Job
       </button>

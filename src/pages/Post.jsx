@@ -99,7 +99,7 @@ const Post = () => {
           </button>
           <button
             onClick={handleContinue}
-            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md flex items-center gap-2 transition"
+            className="bg-blue-600 hover:cursor-pointer hover:bg-blue-700 text-white px-6 py-2 rounded-md flex items-center gap-2 transition"
           >
             Continue <ArrowRight />
           </button>

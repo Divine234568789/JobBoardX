@@ -112,7 +112,7 @@ const Pay = () => {
           <div className="flex justify-between mt-10">
             <button
               onClick={() => navigate(-1)}
-              className="flex items-center gap-2 border border-blue-600 text-blue-600 px-6 py-2 rounded-full hover:bg-blue-50 transition"
+              className="flex items-center gap-2 border border-blue-600 text-blue-600 px-6 py-2 rounded-full hover:cursor-pointer hover:bg-blue-50 transition"
             >
               <ChevronLeft size={18} />
               Back
@@ -123,7 +123,7 @@ const Pay = () => {
               disabled={!isFormValid}
               className={`flex items-center gap-2 px-6 py-2 rounded-full transition ${
                 isFormValid
-                  ? "bg-blue-600 text-white hover:bg-blue-700"
+                  ? "bg-blue-600 text-white hover:bg-blue-700 hover:cursor-pointer"
                   : "bg-gray-300 text-gray-500 cursor-not-allowed"
               }`}
             >
